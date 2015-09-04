@@ -1,16 +1,8 @@
 ﻿<Properties>
-<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="10" Column="23" />
-      <File FileName="Assets\Scripts\PlayerController1.cs" Line="14" Column="12" />
-=======
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Zoom/CameraZoomScript.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Zoom/CameraZoomScript.cs" Line="12" Column="4" />
->>>>>>> 52f819b84aaa06ec0e5e4548b217ccec3a7309fb
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="29" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

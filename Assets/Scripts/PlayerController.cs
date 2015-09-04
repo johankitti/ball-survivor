@@ -30,23 +30,6 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Pick Up"))
 		{
 			other.gameObject.SetActive(false);
-<<<<<<< HEAD
-		}
-	}
-
-}
-=======
-			count = count + 1;
-			SetCountText();
-		}
-	}
-	void SetCountText()
-	{
-		countText.text = "Count: " + count.ToString ();
-		if(count >= 12)
-		{
-			winText.text = "You Win!";
 		}
 	}
 }
->>>>>>> 52f819b84aaa06ec0e5e4548b217ccec3a7309fb
