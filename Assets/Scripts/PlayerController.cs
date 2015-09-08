@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 
 	public float speed;
 	public Text countText;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		if (!isLocalPlayer)
+			return;
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
