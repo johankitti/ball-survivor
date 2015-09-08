@@ -7,7 +7,6 @@ public class PlayerController : NetworkBehaviour {
 
 	public float speed;
 		
-	private Vector3 lastPos;
 	private Rigidbody rb;
 
 	void Start()
@@ -19,18 +18,32 @@ public class PlayerController : NetworkBehaviour {
 	{
 		if (!isLocalPlayer)
 			return;
-
+		
 		bool isFalling = rb.velocity.y < 0;
 		if (isFalling)
 			return;
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+		
+		Vector3 force = new Vector3 (moveHorizontal,0.0f,moveVertical);
 
-		Vector3 movement = new Vector3 (moveHorizontal,0.0f,moveVertical);
+		if (isServer)
+			RpcAddClientForce (force);
+		else 
+			CmdAddForce (force);
+	}
 
-		rb.AddForce (movement * speed);
-		lastPos = transform.position;
+	[Command]
+	public void CmdAddForce(Vector3 force) 
+	{
+		rb.AddForce (force * speed);
+	}
+
+	[ClientRpc]
+	public void RpcAddClientForce(Vector3 force) 
+	{
+		rb.AddForce (force * speed);
 	}
 
 	void OnTriggerEnter (Collider other)
