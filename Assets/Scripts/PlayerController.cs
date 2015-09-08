@@ -7,30 +7,46 @@ public class PlayerController : NetworkBehaviour {
 
 	public float speed;
 		
-	private Vector3 lastPos;
 	private Rigidbody rb;
+	private Renderer rend;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		lastPos = new Vector3(0f,0.5f,0f);
+		rend = GetComponent<Renderer>();
+		AssignRandColor ();
 	}
 
 	void FixedUpdate()
 	{
 		if (!isLocalPlayer)
 			return;
-		Debug.Log (Mathf.Abs(transform.position.y - lastPos.y));
-		if (Mathf.Abs(transform.position.y - lastPos.y) > 0.1f)
+		
+		bool isFalling = rb.velocity.y < 0;
+		if (isFalling)
 			return;
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+		
+		Vector3 force = new Vector3 (moveHorizontal,0.0f,moveVertical);
 
-		Vector3 movement = new Vector3 (moveHorizontal,0.0f,moveVertical);
+		if (isServer)
+			RpcAddClientForce (force);
+		else 
+			CmdAddForce (force);
+	}
 
-		rb.AddForce (movement * speed);
-		lastPos = transform.position;
+	[Command]
+	public void CmdAddForce(Vector3 force) 
+	{
+		rb.AddForce (force * speed);
+	}
+
+	[ClientRpc]
+	public void RpcAddClientForce(Vector3 force) 
+	{
+		rb.AddForce (force * speed);
 	}
 
 	void OnTriggerEnter (Collider other)
@@ -39,5 +55,11 @@ public class PlayerController : NetworkBehaviour {
 		{
 			other.gameObject.SetActive(false);
 		}
+	}
+
+	void AssignRandColor () 
+	{
+
+		rend.material.color = new Color(Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f));
 	}
 }
