@@ -8,10 +8,13 @@ public class PlayerController : NetworkBehaviour {
 	public float speed;
 		
 	private Rigidbody rb;
+	private Renderer rend;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		rend = GetComponent<Renderer>();
+		AssignRandColor ();
 	}
 
 	void FixedUpdate()
@@ -52,5 +55,11 @@ public class PlayerController : NetworkBehaviour {
 		{
 			other.gameObject.SetActive(false);
 		}
+	}
+
+	void AssignRandColor () 
+	{
+
+		rend.material.color = new Color(Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f));
 	}
 }
