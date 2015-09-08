@@ -13,15 +13,15 @@ public class PlayerController : NetworkBehaviour {
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		lastPos = new Vector3(0f,0.5f,0f);
 	}
 
 	void FixedUpdate()
 	{
 		if (!isLocalPlayer)
 			return;
-		Debug.Log (Mathf.Abs(transform.position.y - lastPos.y));
-		if (Mathf.Abs(transform.position.y - lastPos.y) > 0.1f)
+
+		bool isFalling = rb.velocity.y < 0;
+		if (isFalling)
 			return;
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
