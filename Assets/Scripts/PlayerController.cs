@@ -6,6 +6,9 @@ using System.Collections;
 public class PlayerController : NetworkBehaviour {
 
 	public float speed;
+
+	private float startTime;
+	private Vector3 startPos;
 		
 	private Rigidbody rb;
 	private Renderer rend;
@@ -28,6 +31,13 @@ public class PlayerController : NetworkBehaviour {
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+
+		if (Input.touchCount == 1) {
+			startTime = Time.time;
+			startPos = Input.mousePosition;
+			startPos.z = transform.position.z - Camera.main.transform.position.z;
+			startPos = Camera.main.ScreenToWorldPoint(startPos);
+		}
 		
 		Vector3 force = new Vector3 (moveHorizontal,0.0f,moveVertical);
 
@@ -61,5 +71,25 @@ public class PlayerController : NetworkBehaviour {
 	{
 
 		rend.material.color = new Color(Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f), Random.Range (0.0f,1.0f));
+	}
+
+	void OnMouseDown() {
+		startTime = Time.time;
+		startPos = Input.mousePosition;
+		startPos.z = transform.position.z - Camera.main.transform.position.z;
+		startPos = Camera.main.ScreenToWorldPoint(startPos);
+		Debug.Log ("hej");
+	}
+	
+	void OnMouseUp() {
+		var endPos = Input.mousePosition;
+		endPos.z = transform.position.z - Camera.main.transform.position.z;
+		endPos = Camera.main.ScreenToWorldPoint(endPos);
+		
+		var force = endPos - startPos;
+		force.z = force.magnitude;
+		force /= (Time.time - startTime);
+		
+		//rigidbody.AddForce(force * factor);
 	}
 }
