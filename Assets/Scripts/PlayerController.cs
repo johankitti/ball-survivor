@@ -7,6 +7,8 @@ public class PlayerController : NetworkBehaviour {
 
 	public float speed;
 		
+	private Vector2 direction;
+
 	private Rigidbody rb;
 	private Renderer rend;
 
@@ -28,8 +30,27 @@ public class PlayerController : NetworkBehaviour {
 		if (isFalling)
 			return;
 
+		// KEYBOARD MOVEMENT
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+
+		// TOUCH MOVEMENT
+		if (Input.touches.Length > 0) 
+		{
+			if (Input.touches [0].phase == TouchPhase.Moved) {  // Check if Touch has moved.
+				direction = Input.touches [0].deltaPosition.normalized;  // Unit Vector of change in position
+				speed = Input.touches [0].deltaPosition.magnitude; // distance traveled divided by time elapsed
+				Debug.Log (speed);
+			} else {
+				direction = new Vector2 (0f, 0f);
+			}
+		}
+
+		print ("____------____");
+		print (moveHorizontal);
+		moveHorizontal += direction.x;
+		print (moveHorizontal);
+		moveVertical += direction.y;
 	
 		Vector3 horVec = Camera.main.transform.up * moveVertical;
 		Vector3 verVec = Camera.main.transform.right * moveHorizontal;
