@@ -30,8 +30,13 @@ public class PlayerController : NetworkBehaviour {
 
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		
-		Vector3 force = new Vector3 (moveHorizontal,0.0f,moveVertical);
+	
+		Vector3 horVec = Camera.main.transform.up * moveVertical;
+		Vector3 verVec = Camera.main.transform.right * moveHorizontal;
+		Vector3 force = new Vector3 (
+			horVec.x + verVec.x,
+			0.0f,
+			horVec.z + verVec.z);
 
 		if (isServer)
 			RpcAddClientForce (force);
@@ -44,7 +49,7 @@ public class PlayerController : NetworkBehaviour {
 		if (transform.position.y < -20f) {
 			rb.velocity = new Vector3(0f,0f,0f);
 			rb.angularVelocity = new Vector3(0f,0f,0f);
-			transform.position = new Vector3 (0f, 3f, 0f);
+			transform.position = new Vector3 	(0f, 3f, 0f);
 		}
 	}
 
