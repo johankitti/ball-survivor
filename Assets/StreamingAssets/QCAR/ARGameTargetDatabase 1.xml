@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="forest" size="15.000000 15.000000" />
+    <ImageTarget name="wall" size="15.000000 15.000000" />
+    <ImageTarget name="sand" size="15.000000 15.000000" />
+    <ImageTarget name="water" size="15.000000 15.000000" />
+    <ImageTarget name="gamearea" size="36.000000 50.906250" />
+    <ImageTarget name="sats" size="16.000000 26.337448" />
+    <ImageTarget name="osqledaren" size="32.000000 41.217609" />
+    <ImageTarget name="bibliotekskort" size="16.000000 26.349834" />
+  </Tracking>
+</QCARConfig>
