@@ -41,7 +41,6 @@ public class NoNetworkPlayerController : MonoBehaviour {
 			}
 		}
 		
-		print ("____------____");
 		moveHorizontal += direction.x;
 		moveVertical += direction.y;
 		
@@ -77,9 +76,49 @@ public class NoNetworkPlayerController : MonoBehaviour {
 	
 	void OnCollisionEnter (Collision col)
 	{
-		if (col.gameObject.name == "Player(Clone)") 
+		if (col.gameObject.name == "Sphere Bot") 
 		{
-			
+			/*float xDist = rb.position.x - col.rigidbody.position.x;
+			float zDist = rb.position.z - col.rigidbody.position.z;
+			float collisionAngle = Mathf.Atan2(zDist, xDist);
+
+			float angle1 = Mathf.Atan2(rb.velocity.x, rb.velocity.y);
+			float angle2 = Mathf.Atan2(col.rigidbody.velocity.x, col.rigidbody.velocity.z);
+
+			Vector3 velocity1 = new Vector3(
+				rb.velocity.magnitude * Mathf.Cos (angle1 - collisionAngle),
+				0.0f,
+				rb.velocity.magnitude * Mathf.Sin (angle1 - collisionAngle)
+			);
+			Vector3 velocity2 = new Vector3(
+				col.rigidbody.velocity.magnitude * Mathf.Cos (angle2 - collisionAngle),
+				0.0f,
+				col.rigidbody.velocity.magnitude * Mathf.Sin (angle2 - collisionAngle)
+			);
+
+			Vector3 finalVelocity1 = new Vector3(
+				((rb.mass - col.rigidbody.mass) * velocity1.x + (2*col.rigidbody.mass) * velocity2.x) / (rb.mass + col.rigidbody.mass),
+				0.0f,
+				velocity1.z
+			);
+
+			Vector3 finalVelocity2 = new Vector3(
+				((2 * rb.mass) * velocity1.x + (rb.mass - col.rigidbody.mass) * velocity2.x) / (rb.mass + col.rigidbody.mass),
+				0.0f,
+				velocity2.z
+			);
+
+			rb.velocity = new Vector3 (
+				(Mathf.Cos (collisionAngle) * finalVelocity1.x + Mathf.Cos (collisionAngle + Mathf.PI/2) * finalVelocity1.z)*2,
+				0.0f,
+				(Mathf.Sin (collisionAngle) * finalVelocity1.x + Mathf.Sin (collisionAngle + Mathf.PI/2) * finalVelocity1.z)*2
+			);
+			col.rigidbody.velocity = new Vector3 (
+				(Mathf.Cos (collisionAngle) * finalVelocity2.x + Mathf.Cos (collisionAngle + Mathf.PI/2) * finalVelocity2.z)*2,
+				0.0f,
+				(Mathf.Sin (collisionAngle) * finalVelocity2.x + Mathf.Sin (collisionAngle + Mathf.PI/2) * finalVelocity2.z)*2
+			);*/
+
 		}
 	}
 	
