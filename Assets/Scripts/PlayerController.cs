@@ -47,9 +47,7 @@ public class PlayerController : NetworkBehaviour {
 		}
 
 		print ("____------____");
-		print (moveHorizontal);
 		moveHorizontal += direction.x;
-		print (moveHorizontal);
 		moveVertical += direction.y;
 	
 		Vector3 horVec = Camera.main.transform.up * moveVertical;
@@ -101,8 +99,7 @@ public class PlayerController : NetworkBehaviour {
 	{
 		if (col.gameObject.name == "Player(Clone)") 
 		{
-			rb.AddForce (col.rigidbody.velocity * col.rigidbody.mass * 50);
-			col.rigidbody.AddForce (rb.velocity * rb.mass * 50);
+
 		}
 	}
 	
