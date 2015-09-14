@@ -17,11 +17,12 @@ public class NetworkMenuHudScript : NetworkBehaviour {
 
 	void Start () 
 	{
-		networkManager.autoCreatePlayer = true;
 		killServerButton.gameObject.SetActive (false);
 		ipInputField.text = networkManager.ip;
 
 		startServerButton.onClick.AddListener(() => { 
+			networkManager.autoCreatePlayer = false;
+
 			if (connectedButton.image.color == Color.green) 
 			{
 				if (networkManager.StartHost() != null) 
@@ -33,17 +34,13 @@ public class NetworkMenuHudScript : NetworkBehaviour {
 		});
 
 		joinServerButton.onClick.AddListener(() => { 
+			networkManager.autoCreatePlayer = true;
+
 			networkManager.networkAddress = ipInputField.text;
 			NetworkClient networkClient = networkManager.StartClient();
-			if (networkClient.isConnected)
-			{
-				killServerButton.GetComponent<Text>().text = "Leave server";
-				print ("Joined server: " + networkManager.ip);
-				FlipMenu();
-			}
-			else {
-				print ("Couldn't connect to server.");
-			}
+			killServerButton.GetComponent<Text>().text = "Leave server";
+			print ("Joined server: " + networkManager.ip);
+			FlipMenu();
 		});
 
 		killServerButton.onClick.AddListener (() => {

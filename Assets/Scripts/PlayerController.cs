@@ -46,7 +46,6 @@ public class PlayerController : NetworkBehaviour {
 			}
 		}
 
-		print ("____------____");
 		moveHorizontal += direction.x;
 		moveVertical += direction.y;
 	
@@ -68,7 +67,7 @@ public class PlayerController : NetworkBehaviour {
 		if (transform.position.y < -20f) {
 			rb.velocity = new Vector3(0f,0f,0f);
 			rb.angularVelocity = new Vector3(0f,0f,0f);
-			transform.position = new Vector3 	(0f, 3f, 0f);
+			transform.position = new Vector3(Random.Range (-0.3f, 0.3f), 3f, Random.Range(-0.3f, 0.3f));
 		}
 	}
 
